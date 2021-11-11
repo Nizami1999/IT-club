@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://nizamialimammadov:0557997384nizami3@cluster0.pobxu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://nizamialimammadov:0557997384nizami3@cluster0.pobxu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken"
 }
