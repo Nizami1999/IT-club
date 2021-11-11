@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const gravatar = require("gravatar");
-const bycrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const { check, validationResult } = require("express-validator");
 const User = require("../../models/User");
 
 // @route   POST api/users
-// @desc    Test route
+// @desc    Register user
 // @access  Public
 router.post(
   "/",
@@ -54,8 +54,8 @@ router.post(
       });
 
       // Hash password
-      const salt = await bycrypt.genSalt(10);
-      user.password = await bycrypt.hash(password, salt);
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
 
       // Add to db
       await user.save();
