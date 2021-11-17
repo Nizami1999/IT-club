@@ -218,19 +218,14 @@ router.put(
     const newExp = { title, company, location, from, to, current, description };
 
     try {
-      let profile = await Profile.findOne({ user: req.user.id });
-
-      if (!profile) {
-        return res.status(400).json({
-          message: "Profile not found",
-        });
-      }
+      const profile = await Profile.findOne({ user: req.user.id });
 
       profile.experience.unshift(newExp);
 
       await profile.save();
       res.json(profile);
     } catch (err) {
+      console.log(err.message);
       res.status(500).send("Server error");
     }
   }
@@ -259,6 +254,36 @@ router.delete("/experience/:exp_id", auth, async (req, res) => {
 
     res.json(profile);
   } catch (err) {
+    res.status(500).send("Server error");
+  }
+});
+
+// @route   POST api/profile/experience/exp_id
+// @desc    Update experience in profile
+// @access  Private
+router.put("/experience/:exp_id", auth, async (req, res) => {
+  const { title, company, location, from, current, description } = req.body;
+
+  let newExp = { title, company, location, from, current, description };
+
+  try {
+    let profile = await Profile.findOne({ user: req.user.id });
+
+    if (!profile) {
+      return res.status(400).json({
+        message: "Profile not found",
+      });
+    }
+
+    const updateIndex = profile.experience
+      .map((item) => item.id)
+      .indexOf(req.params.exp_id);
+
+    profile.experience[updateIndex] = newExp;
+
+    res.json(profile);
+  } catch (err) {
+    console.log(err.message);
     res.status(500).send("Server error");
   }
 });
