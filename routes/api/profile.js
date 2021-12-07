@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require("../../middleware/auth");
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
+const Post = require("../../models/Post");
 const { check, validationResult } = require("express-validator");
 
 // @route   GET api/profile/me
@@ -25,7 +26,6 @@ router.get("/me", auth, async (req, res) => {
   } catch (err) {
     res.status(500).send("Server error");
   }
-  res.send("Profile route");
 });
 
 // @route   GET api/profile/
@@ -80,7 +80,7 @@ router.post(
     ],
   ],
   async (req, res) => {
-    const errors = validationResult(req); 
+    const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
@@ -179,7 +179,8 @@ router.post(
 // @access  Public
 router.delete("/", auth, async (req, res) => {
   try {
-    // @todo - remove users posts
+    // Remove users' posts
+    await Post.findOneAndDelete({ user: req.user.id });
 
     // Remove profile
     await Profile.findOneAndDelete({ user: req.user.id });
