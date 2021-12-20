@@ -43,7 +43,7 @@ router.post(
       if (!user) {
         return res
           .status(400)
-          .json({ errors: [{ message: "Invalid credentials" }] });
+          .json({ errors: [{ msg: "Invalid credentials" }] });
       }
 
       // Is passwords matches
@@ -51,7 +51,7 @@ router.post(
       if (!isMatch) {
         return res
           .status(400)
-          .json({ errors: [{ message: "Invalid credentials" }] });
+          .json({ errors: [{ msg: "Invalid credentials" }] });
       }
 
       // JWT

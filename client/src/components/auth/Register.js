@@ -1,9 +1,15 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { Link, Navigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { register } from "../../actions/auth";
+import { alertError } from "../../actions/alert";
+import { useDispatch, useSelector } from "react-redux";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,18 +26,15 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== password2) {
-      toast.error("Passwords do not matches!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+      dispatch(alertError("Passwords do not match!"));
     } else {
-      console.log(formData);
+      dispatch(register({ name, email, password }));
     }
   };
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
 
   return (
     <Fragment>
@@ -46,7 +49,6 @@ const Register = () => {
             type="text"
             placeholder="Name"
             name="name"
-            required
             value={name}
             onChange={(e) => onChange(e)}
           />
@@ -69,7 +71,6 @@ const Register = () => {
             type="password"
             placeholder="Password"
             name="password"
-            minLength="6"
             value={password}
             onChange={(e) => onChange(e)}
           />
@@ -79,7 +80,6 @@ const Register = () => {
             type="password"
             placeholder="Confirm Password"
             name="password2"
-            minLength="6"
             value={password2}
             onChange={(e) => onChange(e)}
           />

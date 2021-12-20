@@ -1,7 +1,14 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../actions/auth";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -14,12 +21,16 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("SUCCESS");
+    dispatch(login({ email, password }));
   };
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
 
   return (
     <Fragment>
-      <div className="alert alert-danger">Invalid credentials</div>
+      <ToastContainer />
       <h1 className="large text-primary">Sign In</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Sign into Your Account
@@ -30,7 +41,6 @@ const Login = () => {
             type="email"
             placeholder="Email Address"
             name="email"
-            required
             value={email}
             onChange={(e) => onChange(e)}
           />

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/layout/Navbar";
@@ -5,11 +6,23 @@ import Landing from "./components/layout/Landing";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 // Redux
-import { Provider } from "react-redux";
-import store from "./store";
+import { Provider, useDispatch } from "react-redux";
+import setAuthToken from "./utils/setAuthToken";
+import { useEffect } from "react";
+import { loadUser } from "./actions/auth";
 
-const App = () => (
-  <Provider store={store}>
+const App = () => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, []);
+
+  return (
     <Router>
       <Navbar />
       <Routes>
@@ -22,6 +35,6 @@ const App = () => (
         </Routes>
       </section>
     </Router>
-  </Provider>
-);
+  );
+};
 export default App;
