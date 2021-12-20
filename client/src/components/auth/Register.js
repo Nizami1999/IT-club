@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +20,14 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== password2) {
-      console.log("Passwords do not match");
+      toast.error("Passwords do not matches!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     } else {
       console.log(formData);
     }
@@ -26,6 +35,7 @@ const Register = () => {
 
   return (
     <Fragment>
+      <ToastContainer />
       <h1 className="large text-primary">Sign Up</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Create Your Account
