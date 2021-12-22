@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DashboardActions from "./DashboardActions";
+import Experience from "./Experience";
+import Education from "./Education";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -47,6 +49,12 @@ const Dashboard = () => {
           <i className="fas fa-user"></i> Welcome {user && user.name}
         </p>
         <DashboardActions />
+        {profile?.experience.length > 0 && (
+          <Experience experience={profile.experience} />
+        )}
+        {profile?.education.length > 0 && (
+          <Education education={profile.education} />
+        )}
       </section>
     </Fragment>
   );
