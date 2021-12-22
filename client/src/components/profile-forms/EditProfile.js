@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { Fragment, useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { editProfile } from "../../actions/profile";
+import { createProfile } from "../../actions/profile";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,15 +15,13 @@ const EditProfile = () => {
 
   useEffect(() => {
     dispatch(getMyProfile());
-  }, []);
 
-  useEffect(() => {
     setFormData({
       company: loading || !profile.company ? "" : profile.company,
       website: loading || !profile.website ? "" : profile.website,
       location: loading || !profile.location ? "" : profile.location,
       status: loading || !profile.status ? "" : profile.status,
-      skills: loading || !profile.skills ? "" : profile.skills,
+      skills: loading || !profile.skills ? "" : profile.skills.join(","),
       bio: loading || !profile.bio ? "" : profile.bio,
       githubusername:
         loading || !profile.githubusername ? "" : profile.githubusername,
@@ -73,22 +71,24 @@ const EditProfile = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
     dispatch(
-      editProfile({
-        company,
-        website,
-        location,
-        status,
-        skills,
-        bio,
-        githubusername,
-        youtube,
-        twitter,
-        facebook,
-        linkedin,
-        instagram,
-      })
+      createProfile(
+        {
+          company,
+          website,
+          location,
+          status,
+          skills,
+          bio,
+          githubusername,
+          youtube,
+          twitter,
+          facebook,
+          linkedin,
+          instagram,
+        },
+        true
+      )
     );
   };
 

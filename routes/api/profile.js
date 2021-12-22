@@ -165,7 +165,7 @@ router.post(
 
       return res.json(profile);
     } catch (err) {
-      res.status(500).send("Server error");
+      return res.status(500).send("Server error");
     }
 
     console.log(profileFields.skills);

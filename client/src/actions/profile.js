@@ -23,20 +23,23 @@ export const getMyProfile = () => async (dispatch) => {
 };
 
 export const createProfile =
-  ({
-    company,
-    website,
-    location,
-    bio,
-    status,
-    githubusername,
-    skills,
-    youtube,
-    facebook,
-    twitter,
-    instagram,
-    linkedin,
-  }) =>
+  (
+    {
+      company,
+      website,
+      location,
+      bio,
+      status,
+      githubusername,
+      skills,
+      youtube,
+      facebook,
+      twitter,
+      instagram,
+      linkedin,
+    },
+    edit
+  ) =>
   async (dispatch) => {
     try {
       const config = {
@@ -69,7 +72,9 @@ export const createProfile =
 
       dispatch({
         type: ALERT_SUCCESS,
-        payload: "Profile have been created created successfully",
+        payload: edit
+          ? "Profile has been updated successfully"
+          : "Profile has been created successfully",
       });
     } catch (err) {
       const errors = err.response.data.errors;

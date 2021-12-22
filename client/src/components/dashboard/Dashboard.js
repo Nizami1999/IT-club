@@ -7,6 +7,7 @@ import Spinner from "../layout/Spinner";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import DashboardActions from "./DashboardActions";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,10 @@ const Dashboard = () => {
     <Fragment>
       <section className="container">
         <ToastContainer />
-        <h1>Hello, {user && user.name}</h1>
+        <h1 class="large text-primary">Dashboard</h1>
+        <p class="lead">
+          <i class="fas fa-user"></i> Welcome {user && user.name}
+        </p>
         <p>You haven't setup your profile yet</p>
         <Link to="/create-profile" className="btn btn-primary my-1">
           Create Profile
@@ -37,7 +41,12 @@ const Dashboard = () => {
   ) : (
     <Fragment>
       <section className="container">
-        <h1>Hello, {user && user.name}</h1>
+        <ToastContainer />
+        <h1 class="large text-primary">Dashboard</h1>
+        <p class="lead">
+          <i class="fas fa-user"></i> Welcome {user && user.name}
+        </p>
+        <DashboardActions />
       </section>
     </Fragment>
   );
