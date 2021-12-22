@@ -5,14 +5,17 @@ import { logout } from "../../actions/auth";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { loading, isAuthenticated, user } = useSelector((state) => state.auth);
+  const { loading, isAuthenticated } = useSelector((state) => state.auth);
 
   const authLinks = (
     <ul>
       <li>
-        <span>Hello, {user.name}</span>
+        <Link to={"/dashboard"}>Dashboard</Link>
+      </li>
+      <li>
         <a onClick={() => dispatch(logout())} href="#!">
-          Logout
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
         </a>
       </li>
     </ul>

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/auth";
@@ -29,7 +29,7 @@ const Login = () => {
   }
 
   return (
-    <Fragment>
+    <section className="container">
       <ToastContainer />
       <h1 className="large text-primary">Sign In</h1>
       <p className="lead">
@@ -59,7 +59,7 @@ const Login = () => {
       <p className="my-1">
         Don't have an account? <Link to="/register">Sign Up</Link>
       </p>
-    </Fragment>
+    </section>
   );
 };
 

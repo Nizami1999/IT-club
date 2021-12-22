@@ -9,6 +9,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  CLEAR_PROFILE,
 } from "./types";
 
 import setAuthToken from "../utils/setAuthToken";
@@ -41,7 +42,6 @@ export const register =
 
     try {
       const res = await axios.post("/api/users", body, config);
-      console.log(res);
 
       dispatch({
         type: REGISTER_SUCCESS,
@@ -85,7 +85,6 @@ export const login =
 
     try {
       const res = await axios.post("/api/auth", body, config);
-      console.log(res);
 
       dispatch({
         type: LOGIN_SUCCESS,
@@ -117,7 +116,9 @@ export const login =
 
 // Logout
 export const logout = () => (dispatch) => {
-  debugger;
+  dispatch({
+    type: CLEAR_PROFILE,
+  });
   dispatch({
     type: LOGOUT,
   });

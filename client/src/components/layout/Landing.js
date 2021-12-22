@@ -1,25 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
-const Landing = () => (
-  <section className="landing">
-    <div className="dark-overlay">
-      <div className="landing-inner">
-        <h1 className="x-large">Developer Connector</h1>
-        <p className="lead">
-          Create a developer profile/portfolio, share posts and get help from
-          other developers
-        </p>
-        <div className="buttons">
-          <Link className="btn btn-primary" to="/register">
-            Sign Up
-          </Link>
-          <Link className="btn btn-light" to="/login">
-            Login
-          </Link>
+const Landing = () => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
+
+  return (
+    <section className="landing">
+      <div className="dark-overlay">
+        <div className="landing-inner">
+          <h1 className="x-large">Developer Connector</h1>
+          <p className="lead">
+            Create a developer profile/portfolio, share posts and get help from
+            other developers
+          </p>
+          <div className="buttons">
+            <Link className="btn btn-primary" to="/register">
+              Sign Up
+            </Link>
+            <Link className="btn btn-light" to="/login">
+              Login
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
+
 export default Landing;

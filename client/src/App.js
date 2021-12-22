@@ -5,11 +5,14 @@ import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import Dashboard from "./components/dashboard/Dashboard";
+import CreateProfile from "./components/profile-forms/CreateProfile";
 // Redux
-import { Provider, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import setAuthToken from "./utils/setAuthToken";
 import { useEffect } from "react";
 import { loadUser } from "./actions/auth";
+import PrivateRoute from "./components/routing/PrivateRoute";
 
 const App = () => {
   if (localStorage.token) {
@@ -27,13 +30,13 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Landing />} />
+        <Route exact path="/" element={<PrivateRoute />}>
+          <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route exact path="/create-profile" element={<CreateProfile />} />
+        </Route>
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
       </Routes>
-      <section className="container">
-        <Routes>
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/register" element={<Register />} />
-        </Routes>
-      </section>
     </Router>
   );
 };
