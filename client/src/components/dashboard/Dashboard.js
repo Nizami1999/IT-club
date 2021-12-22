@@ -28,9 +28,9 @@ const Dashboard = () => {
     <Fragment>
       <section className="container">
         <ToastContainer />
-        <h1 class="large text-primary">Dashboard</h1>
-        <p class="lead">
-          <i class="fas fa-user"></i> Welcome {user && user.name}
+        <h1 className="large text-primary">Dashboard</h1>
+        <p className="lead">
+          <i className="fas fa-user"></i> Welcome {user && user.name}
         </p>
         <p>You haven't setup your profile yet</p>
         <Link to="/create-profile" className="btn btn-primary my-1">
@@ -42,9 +42,9 @@ const Dashboard = () => {
     <Fragment>
       <section className="container">
         <ToastContainer />
-        <h1 class="large text-primary">Dashboard</h1>
-        <p class="lead">
-          <i class="fas fa-user"></i> Welcome {user && user.name}
+        <h1 className="large text-primary">Dashboard</h1>
+        <p className="lead">
+          <i className="fas fa-user"></i> Welcome {user && user.name}
         </p>
         <DashboardActions />
       </section>

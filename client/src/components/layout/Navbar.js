@@ -14,7 +14,7 @@ const Navbar = () => {
       </li>
       <li>
         <a onClick={() => dispatch(logout())} href="#!">
-          <i class="fas fa-sign-out-alt"></i>
+          <i className="fas fa-sign-out-alt"></i>
           <span>Logout</span>
         </a>
       </li>

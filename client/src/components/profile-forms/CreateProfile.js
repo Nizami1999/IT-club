@@ -4,6 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import { createProfile } from "../../actions/profile";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Spinner from "../../components/layout/Spinner";
 import { getMyProfile } from "../../actions/profile";
 
