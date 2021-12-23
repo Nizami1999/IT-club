@@ -18,6 +18,7 @@ import AddExperience from "./components/profile-forms/AddExperience";
 import AddEducation from "./components/profile-forms/AddEducation";
 import Profiles from "./components/developers/Profiles";
 import Profile from "./components/profile/Profile";
+import Posts from "./components/post/Posts";
 
 const App = () => {
   if (localStorage.token) {
@@ -42,6 +43,7 @@ const App = () => {
           <Route exact path="/add-experience" element={<AddExperience />} />
           <Route exact path="/add-education" element={<AddEducation />} />
           <Route exact path="/profile/:id" element={<Profile />} />
+          <Route exact path="/posts" element={<Posts />} />
         </Route>
         <Route exact path="/profiles" element={<Profiles />} />
         <Route exact path="/login" element={<Login />} />

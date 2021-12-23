@@ -76,7 +76,9 @@ const Profile = () => {
         </div>
 
         <div class="profile-about bg-light p-2">
-          <h2 class="text-primary">{profile.user.name}'s Bio</h2>
+          <h2 class="text-primary">
+            {profile.user.name.trim().split(" ")[0]}'s Bio
+          </h2>
           <p>{profile.description}</p>
           <div class="line"></div>
           <h2 class="text-primary">Skill Set</h2>
