@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyProfile } from "../../actions/profile";
+import { deleteAccount, getMyProfile } from "../../actions/profile";
 import Spinner from "../layout/Spinner";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -55,6 +55,15 @@ const Dashboard = () => {
         {profile?.education.length > 0 && (
           <Education education={profile.education} />
         )}
+        <div class="my-2">
+          <button
+            class="btn btn-danger"
+            onClick={() => dispatch(deleteAccount())}
+          >
+            <i class="fas fa-user-minus"></i>
+            Delete My Account
+          </button>
+        </div>
       </section>
     </Fragment>
   );

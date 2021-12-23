@@ -1,18 +1,27 @@
 import React, { Fragment } from "react";
 import Moment from "react-moment";
+import { useDispatch } from "react-redux";
+import { deleteExperience } from "../../actions/profile";
 
 const Experience = ({ experience }) => {
+  const dispatch = useDispatch();
+  const onClick = (id) => {
+    dispatch(deleteExperience(id));
+  };
+
   const experiences = experience.map(
-    ({ title, company, from, to, current }) => (
-      <tr>
+    ({ title, company, from, to, current, _id }) => (
+      <tr key={_id}>
         <td>{company}</td>
-        <td class="hide-sm">{title}</td>
-        <td class="hide-sm">
+        <td className="hide-sm">{title}</td>
+        <td className="hide-sm">
           {<Moment format="YYYY/MM/DD">{from}</Moment>} -{" "}
           {current ? " Now" : <Moment format="YYYY/MM/DD">{to}</Moment>}
         </td>
         <td>
-          <button class="btn btn-danger">Delete</button>
+          <button className="btn btn-danger" onClick={(e) => onClick(_id)}>
+            Delete
+          </button>
         </td>
       </tr>
     )
@@ -20,13 +29,13 @@ const Experience = ({ experience }) => {
 
   return (
     <Fragment>
-      <h2 class="my-2">Experience Credentials</h2>
-      <table class="table">
+      <h2 className="my-2">Experience Credentials</h2>
+      <table className="table">
         <thead>
           <tr>
             <th>Company</th>
-            <th class="hide-sm">Title</th>
-            <th class="hide-sm">Years</th>
+            <th className="hide-sm">Title</th>
+            <th className="hide-sm">Years</th>
             <th>Action</th>
           </tr>
         </thead>

@@ -1,18 +1,23 @@
 import axios from "axios";
 import {
-  GET_MY_PROFILE,
+  GET_PROFILE,
   PROFILE_ERROR,
   ALERT_ERROR,
   ALERT_SUCCESS,
   UPDATE_PROFILE,
+  ACCOUNT_DELETED,
+  CLEAR_PROFILE,
+  CLEAR_PROFILES,
+  GET_PROFILES,
 } from "./types";
 
 export const getMyProfile = () => async (dispatch) => {
   try {
     const res = await axios.get("/api/profile/me");
 
+    dispatch({ type: CLEAR_PROFILES });
     dispatch({
-      type: GET_MY_PROFILE,
+      type: GET_PROFILE,
       payload: res.data,
     });
   } catch (err) {
@@ -67,7 +72,7 @@ export const createProfile =
       const res = await axios.post("/api/profile", body, config);
 
       dispatch({
-        type: GET_MY_PROFILE,
+        type: GET_PROFILE,
         payload: res.data,
       });
 
@@ -187,3 +192,100 @@ export const addEducation =
       }
     }
   };
+
+export const deleteExperience = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/profile/experience/${id}`);
+
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data,
+    });
+
+    dispatch({
+      type: ALERT_SUCCESS,
+      payload: "Experience has been successfully deleted",
+    });
+  } catch (err) {
+    dispatch({
+      type: ALERT_ERROR,
+      payload: err.response.data,
+    });
+  }
+};
+
+export const deleteEducation = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/profile/education/${id}`);
+
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data,
+    });
+
+    dispatch({
+      type: ALERT_SUCCESS,
+      payload: "Education has been successfully deleted",
+    });
+  } catch (err) {
+    if (err) {
+      dispatch({
+        type: ALERT_ERROR,
+        payload: err.response.data,
+      });
+    }
+  }
+};
+
+export const deleteAccount = () => async (dispatch) => {
+  if (window.confirm("Are you sure you want to delete your account?")) {
+    try {
+      await axios.delete(`/api/profile`);
+      dispatch({ type: ACCOUNT_DELETED });
+      dispatch({ type: CLEAR_PROFILE });
+      dispatch({
+        type: ALERT_SUCCESS,
+        payload: "You account has been permanently deleted",
+      });
+    } catch (err) {
+      if (err) {
+        dispatch({
+          type: ALERT_ERROR,
+          payload: err.response.data,
+        });
+      }
+    }
+  }
+};
+
+export const getProfiles = () => async (dispatch) => {
+  try {
+    const res = await axios.get("/api/profile");
+    dispatch({ type: CLEAR_PROFILE });
+    dispatch({
+      type: GET_PROFILES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: err.response.data,
+    });
+  }
+};
+
+export const getProfile = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profile/${id}`);
+
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: err.response.data,
+    });
+  }
+};

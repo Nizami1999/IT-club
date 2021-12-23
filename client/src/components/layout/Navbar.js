@@ -10,6 +10,10 @@ const Navbar = () => {
   const authLinks = (
     <ul>
       <li>
+        <Link to="/profiles">Developers</Link>
+      </li>
+      <li></li>
+      <li>
         <Link to={"/dashboard"}>Dashboard</Link>
       </li>
       <li>
@@ -24,7 +28,7 @@ const Navbar = () => {
   const guestLinks = (
     <ul>
       <li>
-        <Link to="profiles">Developers</Link>
+        <Link to="/profiles">Developers</Link>
       </li>
       <li>
         <Link to="/register">Register</Link>

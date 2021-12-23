@@ -1,9 +1,11 @@
 /* eslint-disable import/no-anonymous-default-export */
 import {
-  GET_MY_PROFILE,
+  GET_PROFILE,
   PROFILE_ERROR,
   CLEAR_PROFILE,
   UPDATE_PROFILE,
+  GET_PROFILES,
+  CLEAR_PROFILES,
 } from "../actions/types";
 
 const initialState = {
@@ -17,7 +19,7 @@ const initialState = {
 export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case GET_MY_PROFILE:
+    case GET_PROFILE:
     case UPDATE_PROFILE:
       return {
         ...state,
@@ -41,6 +43,21 @@ export default function (state = initialState, action) {
         loading: false,
         errors: null,
         repos: [],
+      };
+
+    case CLEAR_PROFILES:
+      return {
+        ...state,
+        profiles: null,
+        loading: false,
+        repos: [],
+      };
+
+    case GET_PROFILES:
+      return {
+        ...state,
+        profiles: payload,
+        loading: false,
       };
 
     default:
