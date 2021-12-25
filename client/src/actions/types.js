@@ -22,3 +22,4 @@ export const DELETE_POST = "DELETE_POST";
 export const CREATE_POST = "CREATE_POST";
 export const LIKE_DISLIKE_POST = "LIKE_DISLIKE_POST";
 export const COMMENT_POST = "COMMENT_POST";
+export const DELETE_COMMENT = "DELETE_COMMENT";

@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAccount, getMyProfile } from "../../actions/profile";
+import { getMyProfile } from "../../actions/profile";
 import Spinner from "../layout/Spinner";
-import { Link } from "react-router-dom";
 import DbWithoutProfile from "./DbWithoutProfile";
 import DbWithProfile from "./DbWithProfile";
 

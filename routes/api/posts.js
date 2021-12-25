@@ -234,18 +234,19 @@ router.delete("/comment/:post_id/:comment_id", auth, async (req, res) => {
       });
     }
 
-    const index = post.comments
-      .map((comment) => comment.user.toString())
-      .indexOf(req.user.id);
+    // const index = post.comments
+    //   .map((comment) => comment.user.toString())
+    //   .indexOf(req.user.id);
 
-    post.comments.splice(index, 1);
+    // post.comments.splice(index, 1);
+
+    post.comments = post.comments.filter(
+      ({ id }) => id !== req.params.comment_id
+    );
 
     await post.save();
 
-    return res.status(200).json({
-      message: "Comment was successfully deleted",
-      comments: post.comments,
-    });
+    return res.status(200).json(post.comments);
   } catch (err) {
     if (err.kind === "ObjectId") {
       return res.status(404).json({

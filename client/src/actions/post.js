@@ -8,6 +8,7 @@ import {
   POST_ERROR,
   LIKE_DISLIKE_POST,
   COMMENT_POST,
+  DELETE_COMMENT,
 } from "./types";
 import axios from "axios";
 
@@ -91,7 +92,19 @@ export const commentPost = (id, comment) => async (dispatch) => {
 
     dispatch({ type: COMMENT_POST, payload: res.data });
   } catch (err) {
-    debugger;
     dispatch({ type: ALERT_ERROR, payload: "Text is required" });
+  }
+};
+
+export const deleteComment = (postId, commentId) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
+    dispatch({ type: DELETE_COMMENT, payload: res.data });
+    dispatch({
+      type: ALERT_SUCCESS,
+      payload: "You have successfully deleted your comment",
+    });
+  } catch (err) {
+    dispatch({ type: ALERT_ERROR, payload: err.response.data });
   }
 };

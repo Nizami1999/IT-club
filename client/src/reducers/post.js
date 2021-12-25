@@ -6,6 +6,7 @@ import {
   LIKE_DISLIKE_POST,
   GET_POST,
   COMMENT_POST,
+  DELETE_COMMENT,
 } from "../actions/types";
 
 /* eslint-disable import/no-anonymous-default-export */
@@ -69,6 +70,15 @@ export default function (state = initialState, action) {
       return {
         ...state,
         post: { ...state.post, comments: payload },
+        loading: false,
+      };
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          comments: payload,
+        },
         loading: false,
       };
 

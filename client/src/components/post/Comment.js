@@ -1,8 +1,20 @@
 import React from "react";
 import Moment from "react-moment";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { deleteComment } from "../../actions/post";
 
-const Comment = ({ post: { comment, name, avatar, date } }) => {
+const Comment = ({
+  comment: { _id, user, comment, name, avatar, date },
+  postId,
+}) => {
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const onClick = (postId, commentId) => {
+    dispatch(deleteComment(postId, commentId));
+    debugger;
+  };
   return (
     <div class="post bg-white p-1 my-1">
       <div>
@@ -16,6 +28,15 @@ const Comment = ({ post: { comment, name, avatar, date } }) => {
         <p class="post-date">
           Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
         </p>
+        {!auth.loading && auth.isAuthenticated && auth.user._id === user && (
+          <button
+            type="button"
+            onClick={() => onClick(postId, _id)}
+            class="btn btn-danger"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        )}
       </div>
     </div>
   );

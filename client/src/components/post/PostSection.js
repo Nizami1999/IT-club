@@ -5,7 +5,6 @@ import { createPost, getPosts } from "../../actions/post";
 import Spinner from "../layout/Spinner";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import PostItem from "./PostItem";
 import PostForm from "./PostForm";
 import Posts from "./Posts";
 
