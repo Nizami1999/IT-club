@@ -2,7 +2,7 @@ import React from "react";
 import Moment from "react-moment";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { deletePost } from "../../actions/post";
+import { deletePost, likeDislikePost } from "../../actions/post";
 
 const Post = ({
   post: { _id, user, text, name, avatar, likes, comments, date },
@@ -12,6 +12,10 @@ const Post = ({
 
   const onClick = (id) => {
     dispatch(deletePost(id));
+  };
+
+  const likeUnlike = (id) => {
+    dispatch(likeDislikePost(id));
   };
 
   return (
@@ -27,16 +31,17 @@ const Post = ({
         <p className="post-date">
           Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
         </p>
-        <button type="button" className="btn btn-light">
+        <button
+          type="button"
+          onClick={() => likeUnlike(_id)}
+          className="btn btn-light"
+        >
           <i className="fas fa-thumbs-up"></i>
           <span>{likes.length}</span>
         </button>
-        <button type="button" className="btn btn-light">
-          <i className="fas fa-thumbs-down"></i>
-        </button>
-        <a href="post.html" className="btn btn-primary">
+        <Link to={`/posts/${_id}`} className="btn btn-primary">
           Discussion <span className="comment-count">{comments.length}</span>
-        </a>
+        </Link>
         {!auth.loading && auth.user._id === user && (
           <button
             type="button"

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ProfileItem = ({ profile }) => {
+const Profile = ({ profile }) => {
   return (
     <div className="profile bg-light">
       <img className="round-img" src={profile.user.avatar} alt="" />
@@ -25,7 +25,7 @@ const ProfileItem = ({ profile }) => {
   );
 };
 
-export default ProfileItem;
+export default Profile;
 
 // import React from "react";
 // import { Link } from "react-router-dom";

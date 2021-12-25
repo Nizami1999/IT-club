@@ -7,7 +7,7 @@ import { getProfile } from "../../actions/profile";
 import { useParams } from "react-router-dom";
 import Moment from "react-moment";
 
-const Profile = () => {
+const ProfileItem = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -215,4 +215,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileItem;

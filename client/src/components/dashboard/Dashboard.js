@@ -5,11 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteAccount, getMyProfile } from "../../actions/profile";
 import Spinner from "../layout/Spinner";
 import { Link } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import DashboardActions from "./DashboardActions";
-import Experience from "./Experience";
-import Education from "./Education";
+import DbWithoutProfile from "./DbWithoutProfile";
+import DbWithProfile from "./DbWithProfile";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -22,50 +19,14 @@ const Dashboard = () => {
   const userItem = useSelector((state) => state.auth);
 
   const { user } = userItem;
-  const { profile, loading, errors } = profileItem;
+  const { profile, loading } = profileItem;
 
   return loading ? (
     <Spinner />
-  ) : errors && profile === null ? (
-    <Fragment>
-      <section className="container">
-        <ToastContainer />
-        <h1 className="large text-primary">Dashboard</h1>
-        <p className="lead">
-          <i className="fas fa-user"></i> Welcome {user && user.name}
-        </p>
-        <p>You haven't setup your profile yet</p>
-        <Link to="/create-profile" className="btn btn-primary my-1">
-          Create Profile
-        </Link>
-      </section>
-    </Fragment>
+  ) : profile === null ? (
+    <DbWithoutProfile user={user} />
   ) : (
-    <Fragment>
-      <section className="container">
-        <ToastContainer />
-        <h1 className="large text-primary">Dashboard</h1>
-        <p className="lead">
-          <i className="fas fa-user"></i> Welcome {user && user.name}
-        </p>
-        <DashboardActions />
-        {profile?.experience.length > 0 && (
-          <Experience experience={profile.experience} />
-        )}
-        {profile?.education.length > 0 && (
-          <Education education={profile.education} />
-        )}
-        <div class="my-2">
-          <button
-            class="btn btn-danger"
-            onClick={() => dispatch(deleteAccount())}
-          >
-            <i class="fas fa-user-minus"></i>
-            Delete My Account
-          </button>
-        </div>
-      </section>
-    </Fragment>
+    <DbWithProfile dispatch={dispatch} profile={profile} user={user} />
   );
 };
 export default Dashboard;

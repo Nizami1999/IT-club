@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Spinner from "../../components/layout/Spinner";
 import { getProfiles } from "../../actions/profile";
-import ProfileItem from "./ProfileItem";
+import Profile from "./Profile";
 
 const Profiles = () => {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const Profiles = () => {
       <div className="profiles">
         {profiles.length > 0
           ? profiles.map((profile) => (
-              <ProfileItem key={profile._id} profile={profile} />
+              <Profile key={profile._id} profile={profile} />
             ))
           : "No profiles found"}
       </div>

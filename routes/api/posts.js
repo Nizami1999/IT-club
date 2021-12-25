@@ -139,20 +139,14 @@ router.put("/like/:post_id", auth, async (req, res) => {
       post.likes.splice(index, 1);
 
       await post.save();
-      return res.status(200).json({
-        message: "You return your like from this post",
-        likes: post.likes,
-      });
+      return res.status(200).json(post.likes);
     } else {
       post.likes.unshift({
         user: req.user.id,
       });
 
       await post.save();
-      return res.status(200).json({
-        message: "You liked this post",
-        likes: post.likes,
-      });
+      return res.status(200).json(post.likes);
     }
   } catch (err) {
     if (err.kind === "ObjectId") {
@@ -198,10 +192,7 @@ router.post(
 
       await post.save();
 
-      return res.status(200).json({
-        message: "Comment was successfully added",
-        comments: post.comments,
-      });
+      return res.status(200).json(post.comments);
     } catch (err) {
       if (err.kind === "ObjectId") {
         return res.status(404).json({

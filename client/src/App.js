@@ -17,8 +17,9 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 import AddExperience from "./components/profile-forms/AddExperience";
 import AddEducation from "./components/profile-forms/AddEducation";
 import Profiles from "./components/developers/Profiles";
-import Profile from "./components/profile/Profile";
-import Posts from "./components/post/Posts";
+import PostSection from "./components/post/PostSection";
+import PostItem from "./components/post/PostItem";
+import ProfileItem from "./components/profile/ProfileItem";
 
 const App = () => {
   if (localStorage.token) {
@@ -42,8 +43,9 @@ const App = () => {
           <Route exact path="/edit-profile" element={<EditProfile />} />
           <Route exact path="/add-experience" element={<AddExperience />} />
           <Route exact path="/add-education" element={<AddEducation />} />
-          <Route exact path="/profile/:id" element={<Profile />} />
-          <Route exact path="/posts" element={<Posts />} />
+          <Route exact path="/profile/:id" element={<ProfileItem />} />
+          <Route exact path="/posts" element={<PostSection />} />
+          <Route exact path="/posts/:id" element={<PostItem />} />
         </Route>
         <Route exact path="/profiles" element={<Profiles />} />
         <Route exact path="/login" element={<Login />} />
