@@ -16,10 +16,10 @@ import { loadUser } from "./actions/auth";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import AddExperience from "./components/profile-forms/AddExperience";
 import AddEducation from "./components/profile-forms/AddEducation";
-import Profiles from "./components/developers/Profiles";
 import PostSection from "./components/post/PostSection";
 import PostItem from "./components/post/PostItem";
 import ProfileItem from "./components/profile/ProfileItem";
+import ProfileSection from "./components/developers/ProfileSection";
 
 const App = () => {
   if (localStorage.token) {
@@ -47,7 +47,7 @@ const App = () => {
           <Route exact path="/posts" element={<PostSection />} />
           <Route exact path="/posts/:id" element={<PostItem />} />
         </Route>
-        <Route exact path="/profiles" element={<Profiles />} />
+        <Route exact path="/profiles" element={<ProfileSection />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="*" element={<Landing />} />
