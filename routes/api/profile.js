@@ -167,10 +167,6 @@ router.post(
     } catch (err) {
       return res.status(500).send("Server error");
     }
-
-    console.log(profileFields.skills);
-
-    res.send("Success");
   }
 );
 

@@ -241,7 +241,7 @@ img {
 
 /* Overlay */
 .dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 0;
   left: 0;
@@ -352,7 +352,7 @@ button {
 /* Landing Page */
 .landing {
   position: relative;
-  background: url('./img/showcase.jpg') no-repeat center center/cover;
+  background: url('./img/bg.jpeg') no-repeat center center/cover;
   height: 100vh;
 }
 
@@ -603,3 +603,15 @@ button {
   font-size: 18px;
   margin-bottom: 14px
 }
+
+/* .btn-primary {
+  background-color: #3b5998
+}
+
+.text-primary {
+  color: #3b5998
+}
+
+a {
+  color: #3b5998
+} */

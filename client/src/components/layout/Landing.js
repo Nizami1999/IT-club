@@ -15,8 +15,8 @@ const Landing = () => {
         <div className="landing-inner">
           <h1 className="x-large">IT Club</h1>
           <p className="lead">
-            Create a developer profile/portfolio, share posts and get help from
-            other developers
+            Welcome to our network! Sign up, create your portfolio and
+            communicate with other developers!
           </p>
           <div className="buttons">
             <Link className="btn btn-primary" to="/register">
