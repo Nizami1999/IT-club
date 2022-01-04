@@ -15,6 +15,24 @@ const CreateProfile = () => {
     dispatch(getMyProfile());
   }, []);
 
+  const [fileInputState, setFileInputState] = useState("");
+  const [previewSource, setPreviewSource] = useState("");
+  const [selectedFile, setSelectedFile] = useState("");
+
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      console.log(reader.result);
+      setPreviewSource(reader.result);
+    };
+  };
+
   const [toggleSocialLinks, setToggleSocialLinks] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -171,7 +189,21 @@ const CreateProfile = () => {
           ></textarea>
           <small className="form-text">Tell us a little about yourself</small>
         </div>
-
+        <div className="form-group">
+          <input
+            type="file"
+            name="image"
+            onChange={handleFileInputChange}
+            value={fileInputState}
+          />
+        </div>
+        {previewSource && (
+          <img
+            src={previewSource}
+            alt="chosen"
+            style={{ height: "200px", width: "200px", objectFit: "contain" }}
+          />
+        )}
         <div className="my-2">
           <button
             type="button"

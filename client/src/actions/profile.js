@@ -43,6 +43,7 @@ export const createProfile =
       twitter,
       instagram,
       linkedin,
+      image,
     },
     edit
   ) =>
@@ -67,6 +68,7 @@ export const createProfile =
         twitter,
         instagram,
         linkedin,
+        image,
       });
 
       const res = await axios.post("/api/profile", body, config);
